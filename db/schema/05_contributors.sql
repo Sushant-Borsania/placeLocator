@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS favorite_maps
+DROP TABLE IF EXISTS contributors
 CASCADE;
-CREATE TABLE favorite_maps
+CREATE TABLE contributors
 (
   id SERIAL PRIMARY KEY NOT NULL,
   map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE,
