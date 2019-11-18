@@ -5,9 +5,11 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "local": "./node_modules/.bin/nodemon -L --ignore public/",
-    "db:reset": "node bin/resetdb.js"
+    "startServer": "node server.js",
+    "local": "./node_modules/.bin/nodemon -L",
+    "db:reset": "node bin/resetdb.js",
+    "watch:sass": "node-sass sass/main.scss public/styles/style.css -w",
+    "start": "npm-run-all --parallel watch:sass local"
   },
   "author": "Lighthouse Labs",
   "license": "ISC",
@@ -18,7 +20,9 @@
     "ejs": "^2.6.2",
     "express": "^4.17.1",
     "morgan": "^1.9.1",
+    "node-sass": "^4.13.0",
     "node-sass-middleware": "^0.11.0",
+    "npm-run-all": "^4.1.5",
     "pg": "^6.4.2",
     "pg-native": "^3.0.0"
   },

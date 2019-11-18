@@ -4,9 +4,7 @@ const router = express.Router();
 module.exports = db => {
   router.get("/", (req, res) => {
     let params = req.map_config;
-    res.send(
-      `This is the page where we see maps with the id of ${params.map_id}`
-    );
+    res.render("maps");
   });
   return router;
 };
