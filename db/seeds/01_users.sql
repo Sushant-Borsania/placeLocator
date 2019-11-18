@@ -1,21 +1,21 @@
 -- Users table seeds here (Example)
 INSERT INTO users
-  (name)
+  (name,username,password)
 VALUES
-  ('Alice');
+  ('Alice', 'coolGurl', 'password');
 INSERT INTO users
-  (name)
+  (name,username,password)
 VALUES
-  ('Kira');
+  ('Kira', 'VampireChick', 'password');
 INSERT INTO users
-  (name)
+  (name,username,password)
 VALUES
-  ('Person1');
+  ('abc', 'abc', 'password');
 INSERT INTO users
-  (name)
+  (name,username,password)
 VALUES
-  ('Person2');
+  ('asd', 'asd', 'password');
 INSERT INTO users
-  (name)
+  (name,username,password)
 VALUES
-  ('Person3');
+  ('qwe', 'qwe', 'password');
