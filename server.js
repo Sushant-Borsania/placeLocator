@@ -10,6 +10,8 @@ const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require("morgan");
 
+
+
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
@@ -45,6 +47,9 @@ const registerRoutes = require("./routes/register");
 const userMapRoutes = require("./routes/userMap");
 const userFavMapRoutes = require("./routes/userFavMap");
 const userContMapRoutes = require("./routes/userContMap");
+
+//Importing helper file
+const mapCreator = require("./helpers");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own

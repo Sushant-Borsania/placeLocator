@@ -17,8 +17,21 @@
       integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
       crossorigin="anonymous"
     />
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/styles/style.css" type="text/css" />
-
+    <!-- Leaflet JS -->
+    <script
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+    ></script>
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
@@ -41,8 +54,40 @@
       </div>
     </div>
     <div class="custom_grid">
+      <!-- <div class="card" style="width: 22rem;">
+        <div id="mapid"></div>
+        <div class="card-body">
+          <div class="left-content">
+            <h5 class="card-title">Map Name</h5>
+            <p class="card-text">
+              Category: Gym
+            </p>
+          </div>
+          <div class="right-content">
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-plus"></i>
+          </div>
+        </div>
+        <a href="#" class="btn btn-primary">Explore</a>
+      </div>
       <div class="card" style="width: 22rem;">
-        <img class="card-img-top" src="https://picsum.photos/300/200" alt="Card image cap" />
+        <div id="mapid"></div>
+        <div class="card-body">
+          <div class="left-content">
+            <h5 class="card-title">Map Name</h5>
+            <p class="card-text">
+              Category: Gym
+            </p>
+          </div>
+          <div class="right-content">
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-plus"></i>
+          </div>
+        </div>
+        <a href="#" class="btn btn-primary">Explore</a>
+      </div>
+      <div class="card" style="width: 22rem;">
+        <div id="mapid"></div>
         <div class="card-body">
           <div class="left-content">
             <h5 class="card-title">Map Name</h5>
@@ -88,39 +133,10 @@
           </div>
         </div>
         <a href="#" class="btn btn-primary">Explore</a>
-      </div>
-      <div class="card" style="width: 22rem;">
-        <img class="card-img-top" src="https://picsum.photos/300/200" alt="Card image cap" />
-        <div class="card-body">
-          <div class="left-content">
-            <h5 class="card-title">Map Name</h5>
-            <p class="card-text">
-              Category: Gym
-            </p>
-          </div>
-          <div class="right-content">
-            <i class="fas fa-heart"></i>
-            <i class="fas fa-plus"></i>
-          </div>
-        </div>
-        <a href="#" class="btn btn-primary">Explore</a>
-      </div>
-      <div class="card" style="width: 22rem;">
-        <img class="card-img-top" src="https://picsum.photos/300/200" alt="Card image cap" />
-        <div class="card-body">
-          <div class="left-content">
-            <h5 class="card-title">Map Name</h5>
-            <p class="card-text">
-              Category: Gym
-            </p>
-          </div>
-          <div class="right-content">
-            <i class="fas fa-heart"></i>
-            <i class="fas fa-plus"></i>
-          </div>
-        </div>
-        <a href="#" class="btn btn-primary">Explore</a>
-      </div>
+      </div> -->
     </div>
   </body>
+  <script>
+    mapCreator();
+  </script>
 </html>
