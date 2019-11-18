@@ -10,12 +10,12 @@ VALUES
 INSERT INTO users
   (name,username,password)
 VALUES
-  ('abc', 'abc', 'password');
+  ('1', 'a', 'password');
 INSERT INTO users
   (name,username,password)
 VALUES
-  ('asd', 'asd', 'password');
+  ('2', 'b', 'password');
 INSERT INTO users
   (name,username,password)
 VALUES
-  ('qwe', 'qwe', 'password');
+  ('3', 'c', 'password');

@@ -1,14 +1,14 @@
 INSERT INTO maps
-  (contributor_id,name,category,owner_id)
+  (user_id,name,category,owner_id,map_latlong)
 VALUES
-  (1, 'FoodMap', 'Food', 1);
+  (1, 'CalgaryFoodMap', 'Food', 1, '(51.048615, -114.070847)');
 
 INSERT INTO maps
-  (contributor_id,name,category,owner_id)
+  (user_id,name,category,owner_id,map_latlong)
 VALUES
-  (2, 'GymMap', 'Gym', 2);
+  (2, 'TorontoGymMap', 'Gym', 2, '(43.653225, -79.383186)');
 
 INSERT INTO maps
-  (contributor_id,name,category,owner_id)
+  (user_id,name,category,owner_id,map_latlong)
 VALUES
-  (1, 'MallMap', 'Shopping', 2);
+  (1, 'EdmontonMallMap', 'Shopping', 2, '(53.544388, -113.490929)');
