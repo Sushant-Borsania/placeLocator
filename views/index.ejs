@@ -5,13 +5,122 @@
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha256-YLGeXaapI0/5IgZopewRJcFXomhRMlYYjugPLSyNjTY="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+      integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/styles/style.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
 
   <body>
-    <h1>Hello World!!!</h1>
+    <% include ../views/partials/navbar.ejs %>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col search_input">
+          <nav class="navbar navbar-light">
+            <form class="form-inline">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </nav>
+        </div>
+        <div class="col my-auto text-right">
+          <button type="button" class="btn btn-primary mr-auto">Create New Map</button>
+        </div>
+      </div>
+    </div>
+    <div class="custom_grid">
+      <div class="card" style="width: 22rem;">
+        <img class="card-img-top" src="https://picsum.photos/300/200" alt="Card image cap" />
+        <div class="card-body">
+          <div class="left-content">
+            <h5 class="card-title">Map Name</h5>
+            <p class="card-text">
+              Category: Gym
+            </p>
+          </div>
+          <div class="right-content">
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-plus"></i>
+          </div>
+        </div>
+        <a href="#" class="btn btn-primary">Explore</a>
+      </div>
+      <div class="card" style="width: 22rem;">
+        <img class="card-img-top" src="https://picsum.photos/300/200" alt="Card image cap" />
+        <div class="card-body">
+          <div class="left-content">
+            <h5 class="card-title">Map Name</h5>
+            <p class="card-text">
+              Category: Gym
+            </p>
+          </div>
+          <div class="right-content">
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-plus"></i>
+          </div>
+        </div>
+        <a href="#" class="btn btn-primary">Explore</a>
+      </div>
+      <div class="card" style="width: 22rem;">
+        <img class="card-img-top" src="https://picsum.photos/300/200" alt="Card image cap" />
+        <div class="card-body">
+          <div class="left-content">
+            <h5 class="card-title">Map Name</h5>
+            <p class="card-text">
+              Category: Gym
+            </p>
+          </div>
+          <div class="right-content">
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-plus"></i>
+          </div>
+        </div>
+        <a href="#" class="btn btn-primary">Explore</a>
+      </div>
+      <div class="card" style="width: 22rem;">
+        <img class="card-img-top" src="https://picsum.photos/300/200" alt="Card image cap" />
+        <div class="card-body">
+          <div class="left-content">
+            <h5 class="card-title">Map Name</h5>
+            <p class="card-text">
+              Category: Gym
+            </p>
+          </div>
+          <div class="right-content">
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-plus"></i>
+          </div>
+        </div>
+        <a href="#" class="btn btn-primary">Explore</a>
+      </div>
+      <div class="card" style="width: 22rem;">
+        <img class="card-img-top" src="https://picsum.photos/300/200" alt="Card image cap" />
+        <div class="card-body">
+          <div class="left-content">
+            <h5 class="card-title">Map Name</h5>
+            <p class="card-text">
+              Category: Gym
+            </p>
+          </div>
+          <div class="right-content">
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-plus"></i>
+          </div>
+        </div>
+        <a href="#" class="btn btn-primary">Explore</a>
+      </div>
+    </div>
   </body>
 </html>
