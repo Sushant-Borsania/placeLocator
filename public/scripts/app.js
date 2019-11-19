@@ -1,37 +1,38 @@
-// $(() => {
-//   $.ajax({
-//     method: "GET",
-//     url: "/api/users"
-//   }).done((users) => {
-//     for(user of users) {
-//       $("<div>").text(user.name).appendTo($("body"));
-//     }
-//   });;
-// });
+// // PG database client/connection setup
+// const { Pool } = require("pg");
+// const dbParams = require("./lib/db.js");
+// const db = new Pool(dbParams);
+// db.connect();
 
-const latlng = [
-  [51.040053, -114.066162],
-  [53.522523, -113.622669],
-  [43.65133, -79.379136],
-  [43.65133, -79.379136],
-  [43.65133, -79.379136]
-];
+// const latlng = [
+//   [51.040053, -114.066162],
+//   [53.522523, -113.622669],
+//   [43.65133, -79.379136],
+//   [43.65133, -79.379136],
+//   [43.65133, -79.379136]
+// ];
 
-const mapCreator = () => {
-  latlng.forEach((data, i) => {
-    console.log(i);
+// const mapData = pool
+//   .query(
+//     `
+// SELECT * FROM maps;
+//   `
+//   )
+//   .then(res => {
+//     console.log(res);
+//   })
+//   .catch(err => console.error("query error", err.stack));
+
+// console.log("mapDATA", mapData);
+
+const mapCreator = data => {
+  data.forEach((data, i) => {
     $(".custom_grid").append(`
     <div class="card" style="width: 22rem;">
       <div class="mapPlaceholder" id="mapid-${i}"></div>
-    <div class="card-body">
-          <div class="left-content">
-            <h5 class="card-title">Map Name</h5>
-            <p class="card-text">
-              Category: Gym
-            </p>
-          </div>
-          <div class="right-content">
-            <i class="fas fa-heart"></i>
+    <div class  <script>
+    mapCreator(latlngData)
+  </script>class="fas fa-heart"></i>
             <i class="fas fa-plus"></i>
           </div>
         </div>

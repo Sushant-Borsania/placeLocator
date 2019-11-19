@@ -1,0 +1,3 @@
+-- DROP DATABASE IF EXISTS midterm;
+
+-- CREATE DATABASE midterm;

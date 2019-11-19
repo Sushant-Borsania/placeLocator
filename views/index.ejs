@@ -37,106 +37,42 @@
   </head>
 
   <body>
-    <% include ../views/partials/navbar.ejs %>
+    <% include ../views/partials/navbar.ejs %> <%= console.log(latlngData) %>
     <div class="container-fluid">
       <div class="row">
         <div class="col search_input">
           <nav class="navbar navbar-light">
             <form class="form-inline">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <input
+                class="form-control mr-sm-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button
+                class="btn btn-outline-success my-2 my-sm-0"
+                type="submit"
+              >
+                Search
+              </button>
             </form>
           </nav>
         </div>
         <div class="col my-auto text-right">
-          <button type="button" class="btn btn-primary mr-auto">Create New Map</button>
+          <button type="button" class="btn btn-primary mr-auto">
+            Create New Map
+          </button>
         </div>
       </div>
     </div>
-    <div class="custom_grid">
-      <!-- <div class="card" style="width: 22rem;">
-        <div id="mapid"></div>
-        <div class="card-body">
-          <div class="left-content">
-            <h5 class="card-title">Map Name</h5>
-            <p class="card-text">
-              Category: Gym
-            </p>
-          </div>
-          <div class="right-content">
-            <i class="fas fa-heart"></i>
-            <i class="fas fa-plus"></i>
-          </div>
-        </div>
-        <a href="#" class="btn btn-primary">Explore</a>
-      </div>
-      <div class="card" style="width: 22rem;">
-        <div id="mapid"></div>
-        <div class="card-body">
-          <div class="left-content">
-            <h5 class="card-title">Map Name</h5>
-            <p class="card-text">
-              Category: Gym
-            </p>
-          </div>
-          <div class="right-content">
-            <i class="fas fa-heart"></i>
-            <i class="fas fa-plus"></i>
-          </div>
-        </div>
-        <a href="#" class="btn btn-primary">Explore</a>
-      </div>
-      <div class="card" style="width: 22rem;">
-        <div id="mapid"></div>
-        <div class="card-body">
-          <div class="left-content">
-            <h5 class="card-title">Map Name</h5>
-            <p class="card-text">
-              Category: Gym
-            </p>
-          </div>
-          <div class="right-content">
-            <i class="fas fa-heart"></i>
-            <i class="fas fa-plus"></i>
-          </div>
-        </div>
-        <a href="#" class="btn btn-primary">Explore</a>
-      </div>
-      <div class="card" style="width: 22rem;">
-        <img class="card-img-top" src="https://picsum.photos/300/200" alt="Card image cap" />
-        <div class="card-body">
-          <div class="left-content">
-            <h5 class="card-title">Map Name</h5>
-            <p class="card-text">
-              Category: Gym
-            </p>
-          </div>
-          <div class="right-content">
-            <i class="fas fa-heart"></i>
-            <i class="fas fa-plus"></i>
-          </div>
-        </div>
-        <a href="#" class="btn btn-primary">Explore</a>
-      </div>
-      <div class="card" style="width: 22rem;">
-        <img class="card-img-top" src="https://picsum.photos/300/200" alt="Card image cap" />
-        <div class="card-body">
-          <div class="left-content">
-            <h5 class="card-title">Map Name</h5>
-            <p class="card-text">
-              Category: Gym
-            </p>
-          </div>
-          <div class="right-content">
-            <i class="fas fa-heart"></i>
-            <i class="fas fa-plus"></i>
-          </div>
-        </div>
-        <a href="#" class="btn btn-primary">Explore</a>
-      </div> -->
-    </div>
+    <div class="custom_grid"></div>
+
+    <script>
+      let x = "<%= latlngData %>";
+      let latlng = x.split(",");
+      console.log(latlng);
+      // console.log(latlngData);
+      // mapCreator(latlngData);
+    </script>
   </body>
-  <script>
-    mapCreator();
-  </script>
 </html>
