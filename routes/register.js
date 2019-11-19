@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 
 module.exports = db => {
   router
@@ -10,7 +11,7 @@ module.exports = db => {
     .post((req, res) => {
       const name = req.body.name;
       const userName = req.body.username;
-      const password = req.body.password;
+      const password = bcrypt.hashSync(req.body.password, 10);
       if (!name || !userName || !password) {
         res.send("username and password and name can not be empty");
       } else {

@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 
 module.exports = db => {
   router
@@ -19,7 +20,7 @@ module.exports = db => {
         for (let user of users) {
           if (user.username === req.body.usernameID) {
             userExists = true;
-            if (user.password === bcrypt.compareSync(req.body.passwordID)) {
+            if (bcrypt.compareSync(req.body.passwordID, user.password)) {
               // if (user.password === req.body.passwordID) {
               req.session.user_id2 = user.username;
               res.redirect(`/`);

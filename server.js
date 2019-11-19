@@ -21,9 +21,7 @@ db.connect();
 app.use(
   cookieSession({
     name: "user_id2",
-    keys: [uuidv1()],
-    // Cookie Options
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    keys: [uuidv1()]
   })
 );
 
@@ -57,6 +55,7 @@ const registerRoutes = require("./routes/register");
 const userMapRoutes = require("./routes/userMap");
 const userFavMapRoutes = require("./routes/userFavMap");
 const userContMapRoutes = require("./routes/userContMap");
+const logoutRoutes = require("./routes/logout");
 
 //Importing helper file
 const mapCreator = require("./helpers");
@@ -77,6 +76,7 @@ app.use(
   mapIdRoutes(db)
 );
 app.use("/login", loginRoutes(db));
+app.use("/logout", logoutRoutes(db));
 app.use("/register", registerRoutes(db));
 app.use(
   "/user/:user_id",
