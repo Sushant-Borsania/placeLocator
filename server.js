@@ -10,20 +10,23 @@ const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
+const uuidv1 = require("uuid/v1");
 
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
-//Using cookie-session
+
 app.use(
   cookieSession({
     name: "user_id2",
-    keys: ["Unbreakable"]
-    // secret: 'secret string'
+    keys: [uuidv1()],
+    // Cookie Options
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
   })
 );
+
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
