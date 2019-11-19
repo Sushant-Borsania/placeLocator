@@ -31,3 +31,23 @@ const mapCreator = data => {
     ).addTo(mymap);
   });
 };
+
+//Disabling fuctionality
+const disabler = () =>  {
+  $("form > input").keyup(function() {
+    let empty = false;
+    $("form > input").each(function() {
+      if ($(this).val() == "") {
+        empty = true;
+      }
+    });
+
+    if (empty) {
+      console.log("calling");
+      $("#registerBtn").attr("disabled", "disabled");
+    } else {
+      console.log("call 2");
+      $("#registerBtn").removeAttr("disabled");
+    }
+  });
+};

@@ -10,6 +10,8 @@
       integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
       crossorigin="anonymous"
     />
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
     <title>PlaceLocator</title>
   </head>
   <% include ../views/partials/navbar.ejs %>
@@ -25,8 +27,8 @@
             type="text"
             name="name"
             class="form-control"
-            id="username"
-            aria-describedby="username"
+            id="name"
+            aria-describedby="name"
             placeholder="Enter your name please"
           />
         </div>
@@ -51,8 +53,11 @@
             placeholder="Select password"
           />
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" id="registerBtn">Submit</button>
       </form>
     </div>
+    <script>
+      disabler();
+    </script>
   </body>
 </html>
