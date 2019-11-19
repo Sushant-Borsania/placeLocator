@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <title>Home Page</title>
-
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link
@@ -35,24 +34,15 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
-
   <body>
-    <% include ../views/partials/navbar.ejs %> <%= console.log(latlngData) %>
+    <% include ../views/partials/navbar.ejs %>
     <div class="container-fluid">
       <div class="row">
         <div class="col search_input">
           <nav class="navbar navbar-light">
             <form class="form-inline">
-              <input
-                class="form-control mr-sm-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button
-                class="btn btn-outline-success my-2 my-sm-0"
-                type="submit"
-              >
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
                 Search
               </button>
             </form>
@@ -66,13 +56,15 @@
       </div>
     </div>
     <div class="custom_grid"></div>
-
-    <script>
-      let x = "<%= latlngData %>";
-      let latlng = x.split(",");
-      console.log(latlng);
-      // console.log(latlngData);
-      // mapCreator(latlngData);
-    </script>
   </body>
+  <script>
+    let latlangRaw = "<%= latlngData %>";
+    let nameRaw = "<%= name %>";
+    let categoryRaw = "<%= category %>";
+    let latlang = JSON.parse(latlangRaw);
+    let name = nameRaw.split(",");
+    let category = categoryRaw.split(",");
+    let y = [latlang, name, category];
+    mapCreator(y);
+  </script>
 </html>

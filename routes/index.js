@@ -6,12 +6,15 @@ module.exports = db => {
     let query = `SELECT * FROM maps`;
     db.query(query).then(data => {
       let latlng = [];
+      let name = [];
+      let category = [];
       const maps = data.rows;
       for (let map of maps) {
         latlng.push(Object.values(map.map_latlong));
+        name.push(map.name);
+        category.push(map.category);
       }
-      // console.log(latlng);
-      res.render("index", { latlngData: latlng });
+      res.render("index", { latlngData: JSON.stringify(latlng), name: name, category: category });
     });
   });
   return router;
