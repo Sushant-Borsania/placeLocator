@@ -22,9 +22,7 @@ module.exports = db => {
       } else {
         db.query(`SELECT * FROM users;`).then(data => {
           const users = data.rows;
-          console.log(users);
           users.forEach(user => {
-            // console.log(user);
             if (user.username === userName) {
               res.send("username already taken!");
             }
