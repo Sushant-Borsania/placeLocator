@@ -6,7 +6,12 @@ module.exports = db => {
   router
     .route("/")
     .get((req, res) => {
-      res.render("register");
+      if (req.session.user_id2 === undefined) {
+        let templateVars = { user_id: req.session["user_id2"] };
+        res.render("register", templateVars);
+      } else {
+        res.redirect(`/`);
+      }
     })
     .post((req, res) => {
       const name = req.body.name;

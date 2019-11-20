@@ -32,7 +32,8 @@ module.exports = db => {
           name: name,
           category: category,
           flags: JSON.stringify(flags),
-          id: id
+          id: id,
+          user_id: req.session["user_id2"]
         });
       });
     });
