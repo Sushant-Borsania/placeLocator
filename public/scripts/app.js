@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const mapCreator = data => {
   const latLang = data[0];
   const name = data[1];
@@ -44,6 +45,7 @@ const mapCreator = data => {
 
 //Another version of function
 const createSingleMap = data => {
+  let address = '';
   let map = L.map("singleMap", {
     center: data.latLang,
     zoom: 12
@@ -67,20 +69,22 @@ const createSingleMap = data => {
   let results = new L.LayerGroup().addTo(map);
   searchControl.on("results", function(data) {
     for (let i = data.results.length - 1; i >= 0; i--) {
+      //Starting with blank canavas
       results.clearLayers();
+      //Init marker
       let markerOne = L.marker(data.results[i].latlng);
+      //Add marker layer
       results.addLayer(markerOne);
+      //Add popup with X
       markerOne.bindPopup(
         "<input type='button' value='Delete this marker' class='marker-delete-button'/>"
       );
+      //Adding function to delete the marker on click
       markerOne.on("popupopen", onPopupOpen);
-      console.log(data.results[i]);
+      console.log(data.results[i].address);
+      address = data.results[i].address;
       $(".hidden").removeClass("hidden");
-      $(".marker-delete-button:visible").click(function() {
-        map.removeLayer(tempMarker);
-      });
     }
-
   });
   setTimeout(function() {
     $(".pointer").fadeOut("slow");
@@ -90,4 +94,5 @@ const createSingleMap = data => {
     L.marker(flag).addTo(map);
   });
   map.fitBounds(data.flagCords);
+  return address;
 };

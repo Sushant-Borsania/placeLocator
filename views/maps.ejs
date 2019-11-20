@@ -78,41 +78,47 @@
           <% })%>
         </div>
       </div>
-      <div class="flag-content hidden">
-        <!-- THIS IS THE FORM [START]-->
-        <h6>Add the details of place</h6>
-        <form action="/register" method="POST">
-          <div class="form-group">
-            <label for="username">Name</label>
-            <input
-              type="text"
-              name="name"
-              class="form-control"
-              id="username"
-              aria-describedby="name of flag"
-              placeholder="Enter name please"
-            />
-          </div>
-          <div class="form-group">
-            <label for="description">description</label>
-            <textarea
-              type="text"
-              name="description"
-              class="form-control"
-              id="description"
-              aria-describedby="description"
-              placeholder="Add description"
-            >
-            </textarea>
-          </div>
-          <div class="form-group">
-            <label for="imageURL">Image URL</label>
-            <input type="text" name="imageURL" class="form-control" id="imageURL" placeholder="Select image URL" />
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        <!-- [FORM END] -->
-    </div>
+      <% if(user_id){ %>
+        <div class="flag-content hidden">
+          <!-- THIS IS THE FORM [START]-->
+          <h6>Add the details of place</h6>
+          <form action="/maps/<%= routing %>" method="POST">
+            <div class="form-group">
+              <label for="flagName">Name</label>
+              <input
+                type="text"
+                name="flagName"
+                class="form-control"
+                id="flagName"
+                aria-describedby="name of flag"
+                placeholder="Enter name please"
+              />
+            </div>
+            <div class="form-group">
+              <label for="flagDescription">description</label>
+              <textarea
+                type="text"
+                name="flagDescription"
+                class="form-control"
+                id="flagDescription"
+                aria-describedby="description"
+                placeholder="Add description"
+              >
+              </textarea>
+            </div>
+            <div class="form-group">
+              <label for="imageURL">Image URL</label>
+              <input type="text" name="imageURL" class="form-control" id="imageURL" placeholder="Select image URL" />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          <!-- [FORM END] -->
+      </div>
+      <%} else {%>
+        <div class="flag-content hidden">
+          <p>You need to login to add this to marker</p>
+        </div>
+        <%}%>
     <script>
       let latLangRaw = "<%= mapDetails %>";
       let latLang = latLangRaw.split(",").map(Number);
