@@ -4,6 +4,7 @@ const mapCreator = data => {
   const category = data[2];
   const flags = data[3];
   const id = data[4];
+
   latLang.forEach((data, i) => {
     $(".custom_grid").append(`
     <div class="card" style="width: 22rem;">
@@ -14,10 +15,6 @@ const mapCreator = data => {
           <p class="card-text">
             Category: ${category[i]}
           </p>
-        </div>
-        <div class="right-content">
-          <i class="fas fa-heart"></i>
-          <i class="fas fa-plus"></i>
         </div>
       </div>
       <a href="/maps/${id[i]}" class="btn btn-primary">Explore</a>
@@ -31,10 +28,6 @@ const mapCreator = data => {
         id: "mapbox.streets"
       }
     ).addTo(mymap);
-    // console.log("LATLNG", latLang);
-    // console.log("NAME", name);
-    // console.log("CATE", category);
-    // console.log("FLAGS", flags);
     let boundry = [];
     if (flags[i] !== undefined) {
       for (let j = 0; j < flags[i].length; j++) {

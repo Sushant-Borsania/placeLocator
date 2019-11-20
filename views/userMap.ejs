@@ -24,12 +24,20 @@
     <div class="container-fluid">
       <div class="header_front">
         <h2 class="">My maps</h2>
-        <button type="button" class="btn btn-primary">Create New Map</button>
+        <% if(user_id) { %>
+        <div class="col my-auto text-right">
+          <a href="/create" class="btn btn-primary">Create New Map</a>
+        </div>
+        <% } %>
       </div>
     </div>
     <div class="custom_grid">
       <div class="card" style="width: 22rem;">
-        <img class="card-img-top" src="https://picsum.photos/300/200" alt="Card image cap" />
+        <img
+          class="card-img-top"
+          src="https://picsum.photos/300/200"
+          alt="Card image cap"
+        />
         <div class="card-body">
           <div class="left-content">
             <h5 class="card-title">Map Name</h5>
@@ -45,7 +53,11 @@
         <a href="#" class="btn btn-primary">Explore</a>
       </div>
       <div class="card" style="width: 22rem;">
-        <img class="card-img-top" src="https://picsum.photos/300/200" alt="Card image cap" />
+        <img
+          class="card-img-top"
+          src="https://picsum.photos/300/200"
+          alt="Card image cap"
+        />
         <div class="card-body">
           <div class="left-content">
             <h5 class="card-title">Map Name</h5>
@@ -61,7 +73,11 @@
         <a href="#" class="btn btn-primary">Explore</a>
       </div>
       <div class="card" style="width: 22rem;">
-        <img class="card-img-top" src="https://picsum.photos/300/200" alt="Card image cap" />
+        <img
+          class="card-img-top"
+          src="https://picsum.photos/300/200"
+          alt="Card image cap"
+        />
         <div class="card-body">
           <div class="left-content">
             <h5 class="card-title">Map Name</h5>
