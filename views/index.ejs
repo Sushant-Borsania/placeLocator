@@ -41,18 +41,26 @@
         <div class="col search_input">
           <nav class="navbar navbar-light">
             <form class="form-inline">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+              <input
+                class="form-control mr-sm-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button
+                class="btn btn-outline-success my-2 my-sm-0"
+                type="submit"
+              >
                 Search
               </button>
             </form>
           </nav>
         </div>
+        <% if(user_id) { %>
         <div class="col my-auto text-right">
-          <button type="button" class="btn btn-primary mr-auto">
-            Create New Map
-          </button>
+          <a href="/create" class="btn btn-primary">Create New Map</a>
         </div>
+        <% } %>
       </div>
     </div>
     <div class="custom_grid"></div>

@@ -23,15 +23,19 @@
         </div>
         <h4 class="mt-4">Description</h4>
         <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates, velit ad. Minus, impedit, recusandae
-          adipisci repellendus magni error, ex facere eveniet dolor laboriosam repudiandae vel? Voluptas ab adipisci
-          odio porro illum, pariatur deleniti at hic consectetur reprehenderit minus, ratione accusantium, aspernatur
-          itaque ut architecto voluptates. Reprehenderit modi minus quia labore.
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates,
+          velit ad. Minus, impedit, recusandae adipisci repellendus magni error,
+          ex facere eveniet dolor laboriosam repudiandae vel? Voluptas ab
+          adipisci odio porro illum, pariatur deleniti at hic consectetur
+          reprehenderit minus, ratione accusantium, aspernatur itaque ut
+          architecto voluptates. Reprehenderit modi minus quia labore.
         </p>
         <div class="current-flags">
           <div class="alert alert-primary flag-brief" role="alert">
-            A simple primary alert—check it out!
-            <button class="btn btn-danger float-right my-auto">delete</button>
+            A simple primary alert—check it out! <% if(user_id && owner) { %>
+            <button class="btn btn-warning float-right my-auto">Edit</button>
+            <button class="btn btn-danger float-right my-auto">Delete</button>
+            <% } %>
           </div>
         </div>
       </div>

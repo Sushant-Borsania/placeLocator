@@ -14,7 +14,12 @@ module.exports = db => {
         name.push(map.name);
         category.push(map.category);
       }
-      res.render("index", { latlngData: JSON.stringify(latlng), name: name, category: category });
+      res.render("index", {
+        latlngData: JSON.stringify(latlng),
+        name: name,
+        category: category,
+        user_id: req.session["user_id2"]
+      });
     });
   });
   return router;
