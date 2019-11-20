@@ -33,7 +33,13 @@
       integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
       crossorigin=""
     ></script>
+    <!-- Additional leaflet js -->
+    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
+    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+    <!-- JQUERY -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <!-- Custom JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
     <title>PlaceLocator</title>
   </head>
@@ -41,31 +47,41 @@
   <body>
     <div class="container-maps">
       <div class="map-content">
-        <h4>Map Name Here</h4>
+        <h4><%= name %></h4>
         <div class="map_placeholder">
           <div class="custom_grid_2" id="singleMap" style="height: 300px"></div>
         </div>
-        <h4 class="mt-4">Description</h4>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates, velit ad. Minus, impedit, recusandae
-          adipisci repellendus magni error, ex facere eveniet dolor laboriosam repudiandae vel? Voluptas ab adipisci
-          odio porro illum, pariatur deleniti at hic consectetur reprehenderit minus, ratione accusantium, aspernatur
-          itaque ut architecto voluptates. Reprehenderit modi minus quia labore.
-        </p>
+        <h4 class="mt-4">Category</h4>
+        <p><%= category %></p>
+        <!-- defining the variables -->
+        <% let flagDesc = JSON.parse(flagDescription) %> <% let flagN =
+        JSON.parse(flagName) %> <% let flagURL = JSON.parse(flagImageUrl) %>
+
         <div class="current-flags">
+          <% flagDesc.forEach((el, i) => {%>
           <div class="alert alert-primary flag-brief" role="alert">
-            A simple primary alert—check it out! <% if(user_id && owner) { %>
-            <button class="btn btn-warning float-right my-auto">Edit</button>
-            <button class="btn btn-danger float-right my-auto">Delete</button>
+            <div class="flag-details">
+              <h6>
+                <%= flagN[i] %> - <%= el%>
+              </h6>
+            </div>
+            <%if(flagURL.length) {%>
+            <img src="<%= flagURL[i]%> %>" style="width: 100%" />
             <% } %>
+            <div class="flag-buttons mt-5">
+              <% if(user_id && owner) { %>
+              <button class="btn btn-warning">Edit</button>
+              <button class="btn btn-danger">Delete</button>
+              <% } %>
+            </div>
           </div>
+          <% })%>
         </div>
       </div>
-      <div class="flag-content">
-        <!-- either of the below to display based on where it was clicked! -->
-
+      <div class="flag-content hidden">
+        <!-- THIS IS THE FORM [START]-->
         <h6>Add the details of place</h6>
-        <!-- <form action="/register" method="POST">
+        <form action="/register" method="POST">
           <div class="form-group">
             <label for="username">Name</label>
             <input
@@ -94,25 +110,24 @@
             <input type="text" name="imageURL" class="form-control" id="imageURL" placeholder="Select image URL" />
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
-        </form> -->
-        <h5>The details of place</h5>
-        <p class="name">Name: Fetch name from dbs</p>
-        <p class="descriptio">Description: fetch descrioption from db here</p>
-        <p class="address">Address: Address from db here</p>
-        <img src="https://picsum.photos/300/200" alt="" />
-      </div>
+        </form>
+        <!-- [FORM END] -->
     </div>
     <script>
       let latLangRaw = "<%= mapDetails %>";
       let latLang = latLangRaw.split(",").map(Number);
       let flagCordsRaw = "<%= flagCords %>";
       let flagCords = JSON.parse(flagCordsRaw);
-      // console.log(JSON.parse(flagCordsRaw));
+      let name = "<%= name %>";
+      let category = "<%= category %>";
       let data = {
         latLang: latLang,
-        flagCords: flagCords
+        flagCords: flagCords,
+        name: name,
+        category: category
       };
       createSingleMap(data);
     </script>
   </body>
 </html>
+
