@@ -9,6 +9,9 @@ module.exports = db => {
     )};`;
     db.query(query2).then(data => {
       // console.log("IDD",data.rows[0]);
+      if (data.rows[0] === undefined) {
+        res.redirect(`/`);
+      }
       let latLong = Object.values(data.rows[0].map_latlong);
       //flag stuff started here
       let flagCords = [];
