@@ -8,17 +8,24 @@ module.exports = db => {
       params.map_id
     )};`;
     db.query(query2).then(data => {
-      // console.log("IDD",data.rows[0]);
       let latLong = Object.values(data.rows[0].map_latlong);
-      //flag stuff started here
+      let name = data.rows[0].name;
+      let category = data.rows[0].category;
+
+      //containers for flag details
       let flagCords = [];
+      let flagName = [];
+      let flagDescription = [];
+      let flagImageUrl = [];
+      //Looping to store flag data in an array
       data.rows.forEach(el => {
         if (el.latlong !== null) {
           flagCords.push(Object.values(el.latlong));
+          flagName.push(el.title);
+          flagDescription.push(el.description);
+          flagImageUrl.push(el.image);
         }
       });
-
-      //Adding %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       if (req.session.user_id2 !== undefined) {
         let query = `SELECT maps.id
         FROM maps
@@ -40,7 +47,12 @@ module.exports = db => {
             user_id: req.session["user_id2"],
             owner: mapOwner,
             mapDetails: latLong,
-            flagCords: JSON.stringify(flagCords)
+            flagCords: JSON.stringify(flagCords),
+            name: name,
+            category: category,
+            flagName: JSON.stringify(flagName),
+            flagDescription: JSON.stringify(flagDescription),
+            flagImageUrl: JSON.stringify(flagImageUrl)
           };
           res.render("maps", templateVars);
         });
@@ -48,12 +60,15 @@ module.exports = db => {
         let templateVars = {
           user_id: req.session["user_id2"],
           mapDetails: latLong,
-          flagCords: JSON.stringify(flagCords)
+          flagCords: JSON.stringify(flagCords),
+          name: name,
+          category: category,
+          flagName: JSON.stringify(flagName),
+          flagDescription: JSON.stringify(flagDescription),
+          flagImageUrl: JSON.stringify(flagImageUrl)
         };
         res.render("maps", templateVars);
       }
-
-      //Closed%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     });
   });
   return router;

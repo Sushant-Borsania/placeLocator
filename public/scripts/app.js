@@ -39,19 +39,52 @@ const mapCreator = data => {
   });
 };
 
-//Create function that will create map based on ID of map
-
+//Another version of function
 const createSingleMap = data => {
-  let mymap = L.map("singleMap").setView(data.latLang, 14);
+  let map = L.map("singleMap", {
+    center: data.latLang,
+    zoom: 12
+  });
+
+  L.control.scale().addTo(map);
   L.tileLayer(
     "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw",
     {
-      maxZoom: 18,
       id: "mapbox.streets"
     }
-  ).addTo(mymap);
-  data.flagCords.forEach(flag => {
-    L.marker(flag).addTo(mymap);
+  ).addTo(map);
+
+  const onPopupOpen = () => {
+    $(".marker-delete-button:visible").click(function() {
+      results.clearLayers();
+    });
+  };
+
+  let searchControl = new L.esri.Controls.Geosearch().addTo(map);
+  let results = new L.LayerGroup().addTo(map);
+  searchControl.on("results", function(data) {
+    for (let i = data.results.length - 1; i >= 0; i--) {
+      results.clearLayers();
+      let markerOne = L.marker(data.results[i].latlng);
+      results.addLayer(markerOne);
+      markerOne.bindPopup(
+        "<input type='button' value='Delete this marker' class='marker-delete-button'/>"
+      );
+      markerOne.on("popupopen", onPopupOpen);
+      console.log(data.results[i]);
+      $(".hidden").removeClass("hidden");
+      $(".marker-delete-button:visible").click(function() {
+        map.removeLayer(tempMarker);
+      });
+    }
+
   });
-  mymap.fitBounds(data.flagCords);
+  setTimeout(function() {
+    $(".pointer").fadeOut("slow");
+  }, 3400);
+
+  data.flagCords.forEach(flag => {
+    L.marker(flag).addTo(map);
+  });
+  map.fitBounds(data.flagCords);
 };

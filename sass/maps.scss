@@ -8,6 +8,7 @@
 .flag-brief {
   display: flex;
   align-items: center;
+  flex-direction: column;
   button {
     margin-left: auto;
   }
@@ -15,4 +16,8 @@
 
 .mapPlaceholder {
   height: 20rem;
+}
+
+.hidden{
+  display: none;
 }
