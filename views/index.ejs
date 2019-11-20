@@ -71,6 +71,21 @@
     let categoryRaw = "<%= category %>";
     let flagRaw = "<%= flags %>";
     let idRaw = "<%= id %>";
+    let myRaw = "<%= ownedID %>";
+    let favRaw = "<%= favID %>";
+    let arrMy = [];
+    let arrFav = [];
+
+    for (let x of myRaw) {
+      if (x !== ",") {
+        arrMy.push(x);
+      }
+    }
+    for (let x of favRaw) {
+      if (x !== ",") {
+        arrFav.push(x);
+      }
+    }
 
     let latlang = JSON.parse(latlangRaw);
     let name = nameRaw.split(",");
