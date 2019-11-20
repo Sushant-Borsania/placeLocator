@@ -2,6 +2,8 @@ const mapCreator = data => {
   const latLang = data[0];
   const name = data[1];
   const category = data[2];
+  const flags = data[3];
+  const id = data[4];
   latLang.forEach((data, i) => {
     $(".custom_grid").append(`
     <div class="card" style="width: 22rem;">
@@ -18,7 +20,7 @@ const mapCreator = data => {
           <i class="fas fa-plus"></i>
         </div>
       </div>
-      <a href="#" class="btn btn-primary">Explore</a>
+      <a href="/maps/${id[i]}" class="btn btn-primary">Explore</a>
     </div>
     `);
     let mymap = L.map(`mapid-${i}`).setView(data, 14);
@@ -29,25 +31,17 @@ const mapCreator = data => {
         id: "mapbox.streets"
       }
     ).addTo(mymap);
-  });
-};
-
-//Disabling fuctionality
-const disabler = () =>  {
-  $("form > input").keyup(function() {
-    let empty = false;
-    $("form > input").each(function() {
-      if ($(this).val() == "") {
-        empty = true;
+    // console.log("LATLNG", latLang);
+    // console.log("NAME", name);
+    // console.log("CATE", category);
+    // console.log("FLAGS", flags);
+    let boundry = [];
+    if (flags[i] !== undefined) {
+      for (let j = 0; j < flags[i].length; j++) {
+        L.marker(flags[i][j]).addTo(mymap);
+        boundry.push(flags[i][j]);
       }
-    });
-
-    if (empty) {
-      console.log("calling");
-      $("#registerBtn").attr("disabled", "disabled");
-    } else {
-      console.log("call 2");
-      $("#registerBtn").removeAttr("disabled");
+      mymap.fitBounds([boundry]);
     }
   });
 };

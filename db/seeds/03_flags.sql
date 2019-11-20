@@ -11,6 +11,21 @@ VALUES
 INSERT INTO flags
   (latlong,address,map_id,title,description,image,user_id)
 VALUES
+  ('(51.046315, -114.063512)', '109 7 Ave SW, Calgary, AB T2P 3E6', 1, 'Eat BBQ', 'Best BBQ', 'https://i.cbc.ca/1.4615294.1523480163!/fileImage/httpImage/the-national.JPG', 2);
+
+INSERT INTO flags
+  (latlong,address,map_id,title,description,image,user_id)
+VALUES
+  ('(51.045943, -114.146926)', '550 17 ave SW', 1, 'Tim Hortons', 'Best Tea', 'https://i.cbc.ca/1.4615294.1523480163!/fileImage/httpImage/the-national.JPG', 2);
+
+INSERT INTO flags
+  (latlong,address,map_id,title,description,image,user_id)
+VALUES
+  ('(51.046207, -114.069168)', '550 17 ave SW', 1, 'National', 'Best Beerhall', 'https://i.cbc.ca/1.4615294.1523480163!/fileImage/httpImage/the-national.JPG', 2);
+
+INSERT INTO flags
+  (latlong,address,map_id,title,description,image,user_id)
+VALUES
   ('(43.651330, -79.379136)', 'Richmond St East', 2, 'Golds Gym', 'Get your swell on', 'https://media.glassdoor.com/l/d0/16/e6/90/store-front.jpg', 2);
 
 INSERT INTO flags
