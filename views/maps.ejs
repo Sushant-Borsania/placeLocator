@@ -41,6 +41,7 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <!-- Custom JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
     <title>PlaceLocator</title>
   </head>
   <% include ../views/partials/navbar.ejs %>
@@ -95,6 +96,22 @@
               />
             </div>
             <div class="form-group">
+                <input
+                  type="hidden"
+                  class="form-control"
+                  name="address"
+                  value=""
+                />
+              </div>
+              <div class="form-group">
+                  <input
+                    type="hidden"
+                    class="form-control"
+                    name="coordinates"
+                    value=""
+                  />
+                </div>
+            <div class="form-group">
               <label for="flagDescription">description</label>
               <textarea
                 type="text"
@@ -110,7 +127,7 @@
               <label for="imageURL">Image URL</label>
               <input type="text" name="imageURL" class="form-control" id="imageURL" placeholder="Select image URL" />
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary flagSubmit">Submit</button>
           </form>
           <!-- [FORM END] -->
       </div>
@@ -132,7 +149,68 @@
         name: name,
         category: category
       };
-      createSingleMap(data);
+      //CREATING FUNCTION TO LOAD MAP
+      let address = '';
+      let coords = '';
+
+
+      const createSingleMap = data => {
+      let map = L.map("singleMap", {
+      center: data.latLang,
+       zoom: 12
+      });
+  L.control.scale().addTo(map);
+  L.tileLayer(
+    "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw",
+    {
+      id: "mapbox.streets"
+    }
+  ).addTo(map);
+  const onPopupOpen = () => {
+    $(".marker-delete-button:visible").click(function() {
+      results.clearLayers();
+    });
+  };
+  let searchControl = new L.esri.Controls.Geosearch().addTo(map);
+  let results = new L.LayerGroup().addTo(map);
+  searchControl.on("results", function(data) {
+    for (let i = data.results.length - 1; i >= 0; i--) {
+      //Starting with blank canavas
+      results.clearLayers();
+      //Init marker
+      let markerOne = L.marker(data.results[i].latlng);
+      //Add marker layer
+      results.addLayer(markerOne);
+      //Add popup with X
+      markerOne.bindPopup(
+        "<input type='button' value='Delete this marker' class='marker-delete-button'/>"
+      );
+      //Adding function to delete the marker on click
+      markerOne.on("popupopen", onPopupOpen);
+      coords = data.results[i].latlng;
+      address = data.results[i].address;
+      $(".hidden").removeClass("hidden");
+          }
+        });
+       setTimeout(function() {
+         $(".pointer").fadeOut("slow");
+       }, 3400);
+
+       data.flagCords.forEach(flag => {
+    L.marker(flag).addTo(map);
+       });
+       map.fitBounds(data.flagCords);
+       return address, coords;
+    };
+
+
+    
+    $('.flagSubmit').on("click", function(){
+      $("input[name=coordinates]").val(coords);
+      $("input[name=address]").val(address);
+    });
+
+    createSingleMap(data);
     </script>
   </body>
 </html>

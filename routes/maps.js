@@ -80,10 +80,55 @@ module.exports = db => {
       });
     })
     .post((req, res) => {
-      console.log(req.body.flagName);
-      console.log(req.body.flagDescription);
-      console.log(req.body.imageURL);
-      res.redirect("back");
+      const flagName = req.body.flagName;
+      const flagDescription = req.body.flagDescription;
+      const imageURL = req.body.imageURL;
+      const flagCoordsRaw = req.body.coordinates;
+      const flagCoords = flagCoordsRaw.substring(6);
+      const flagAddress = req.body.address;
+      let params = req.map_config;
+      let mapID = params.map_id;
+      // console.log(mapID);
+      db.query(
+        `
+        INSERT INTO flags (latlong,address,map_id,title,description,image,user_id) 
+        VALUES ('${flagCoords}', '${flagAddress}', '${mapID}', '${flagName}', '${flagDescription}', '${imageURL}', (SELECT users.id FROM users WHERE users.username = '${req.session.user_id2}') )
+      `
+      ).then(
+        db
+          .query(
+            `
+        SELECT owner_id FROM maps WHERE maps.id = '${mapID}';
+        `
+          )
+          .then(data => {
+            let owner = data.rows[0].owner_id;
+            db.query(
+              `
+            SELECT users.id FROM users WHERE users.username = '${req.session.user_id2}'
+            `
+            ).then(data => {
+              let user = data.rows[0].id;
+              console.log("OWNER", owner);
+              console.log("USER", user);
+              console.log('MAPID', mapID);
+              if (owner !== user) {
+                db.query(`
+                INSERT INTO contributors
+                (map_id,user_id)
+                  VALUES
+                ('${mapID}', '${user}');
+                `);
+
+              }
+            });
+          })
+      );
+      //Get the Owner of map
+
+      //if the owner of map and username does not match, then add to contribution
+
+      res.redirect(`${mapID}`);
     });
   return router;
 };
