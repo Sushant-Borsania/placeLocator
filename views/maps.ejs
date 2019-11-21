@@ -52,7 +52,18 @@
         <div class="map_placeholder">
           <div class="custom_grid_2" id="singleMap" style="height: 300px"></div>
         </div>
-        <h4 class="mt-4">Category</h4>
+
+          <h4 class="mt-4">Category</h4>
+          <form action="" method="POST">
+          <div style="float: right;">
+            <%if(!owned && user_id) {%>
+          <button name="addMap" value="True" class="btn btn-light">Add Map <b>+</b></button>
+          <%}
+          if(!favorite && user_id) {%>
+          <button name="favMap" value="True" class="btn btn-light">Favorite Map ❤</button>
+          <%}%>
+        </div>
+      </form>
         <p><%= category %></p>
         <!-- defining the variables -->
         <% let flagDesc = JSON.parse(flagDescription) %> <% let flagN =
