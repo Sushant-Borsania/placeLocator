@@ -104,56 +104,102 @@ module.exports = db => {
       });
     })
     .post((req, res) => {
-      const flagName = req.body.flagName;
-      const flagDescription = req.body.flagDescription;
-      const imageURL = req.body.imageURL;
-      const flagCoordsRaw = req.body.coordinates;
-      const flagCoords = flagCoordsRaw.substring(6);
-      const flagAddress = req.body.address;
       let params = req.map_config;
       let mapID = params.map_id;
-      // console.log(mapID);
-      db.query(
-        `
-        INSERT INTO flags (latlong,address,map_id,title,description,image,user_id) 
+      let mapAdd = req.body.addMap;
+      let mapFav = req.body.favMap;
+      let addFlag = req.body.sendFlag;
+      let flagEdit = req.body.editFlag;
+      let flagDelete = req.body.deleteFlag;
+      let qMapAdd = `INSERT INTO maps
+      (user_id,name,category,owner_id,map_latlong)
+    VALUES
+      ((SELECT users.id FROM users WHERE users.username = '${req.session.user_id2}'), (SELECT maps.name FROM maps WHERE maps.id = '${mapID}'), (SELECT maps.category FROM maps WHERE maps.id = '${mapID}'), (SELECT users.id FROM users WHERE users.username = '${req.session.user_id2}'), (SELECT maps.map_latlong FROM maps WHERE maps.id = '${mapID}')) RETURNING id;`;
+      let qMapFav = `INSERT INTO favorite_maps
+      (map_id,user_id)
+    VALUES
+      ('${mapID}', (SELECT users.id FROM users WHERE users.username = '${req.session.user_id2}'));`;
+      let qMapUnfav = `DELETE FROM favorite_maps WHERE map_id = '${mapID}' AND user_id = (SELECT users.id FROM users WHERE users.username = '${req.session.user_id2}')`;
+      let qMapDelete = `DELETE FROM maps WHERE id = '${mapID}'`;
+      let qFlagDelete = `DELETE FROM flags where id = (SELECT flags.id
+        FROM flags
+        WHERE flags.map_id = '${mapID}'
+        ORDER BY flags.id
+        OFFSET '${flagDelete}' FETCH FIRST
+        1 ROWS ONLY
+        );`;
+
+      if (flagEdit !== undefined) {
+        //Discuss what this means, flagEdit returns INDEX of flag in order of creation date
+      }
+
+      if (flagDelete !== undefined) {
+        db.query(qFlagDelete);
+      }
+
+      if (mapAdd === "True") {
+        db.query(qMapAdd).then(
+          res.redirect(`/user/${req.session["user_id2"]}`)
+        );
+      }
+
+      if (mapAdd === "False") {
+        db.query(qMapDelete).then(
+          res.redirect(`/user/${req.session["user_id2"]}`)
+        );
+      }
+
+      if (mapFav === "True") {
+        db.query(qMapFav);
+      }
+
+      if (mapFav === "False") {
+        db.query(qMapUnfav);
+      }
+      if (addFlag === "True") {
+        const flagName = req.body.flagName;
+        const flagDescription = req.body.flagDescription;
+        const imageURL = req.body.imageURL;
+        const flagCoordsRaw = req.body.coordinates;
+        const flagCoords = flagCoordsRaw.substring(6);
+        const flagAddress = req.body.address;
+        db.query(
+          `
+        INSERT INTO flags (latlong,address,map_id,title,description,image,user_id)
         VALUES ('${flagCoords}', '${flagAddress}', '${mapID}', '${flagName}', '${flagDescription}', '${imageURL}', (SELECT users.id FROM users WHERE users.username = '${req.session.user_id2}') )
       `
-      ).then(
-        db
-          .query(
-            `
+        ).then(
+          db
+            .query(
+              `
         SELECT owner_id FROM maps WHERE maps.id = '${mapID}';
         `
-          )
-          .then(data => {
-            let owner = data.rows[0].owner_id;
-            db.query(
-              `
+            )
+            .then(data => {
+              let owner = data.rows[0].owner_id;
+              db.query(
+                `
             SELECT users.id FROM users WHERE users.username = '${req.session.user_id2}'
             `
-            ).then(data => {
-              let user = data.rows[0].id;
-              console.log("OWNER", owner);
-              console.log("USER", user);
-              console.log("MAPID", mapID);
-              if (owner !== user) {
-                db.query(`
+              ).then(data => {
+                let user = data.rows[0].id;
+                if (owner !== user) {
+                  db.query(`
                 INSERT INTO contributors
                 (map_id,user_id)
                   VALUES
                 ('${mapID}', '${user}');
                 `);
-              }
-            });
-          })
-      );
+                }
+              });
+            })
+        );
+      }
       //Get the Owner of map
 
       //if the owner of map and username does not match, then add to contribution
 
       res.redirect(`${mapID}`);
-      // console.log(req.body.addMap); //Returns TRUE if addMap is clicked
-      // console.log(req.body.favMap); //Returns TRUE if favMap is clicked
     });
   return router;
 };

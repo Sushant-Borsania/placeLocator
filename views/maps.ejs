@@ -58,10 +58,16 @@
           <div style="float: right;">
             <%if(!owned && user_id) {%>
           <button name="addMap" value="True" class="btn btn-light">Add Map <b>+</b></button>
-          <%}
-          if(!favorite && user_id) {%>
+          <%}%>
+          <%if(owned && user_id) {%>
+            <button name="addMap" value="False" class="btn btn-light">Delete Map</button>
+            <%}%>
+          <%if(!favorite && user_id) {%>
           <button name="favMap" value="True" class="btn btn-light">Favorite Map ❤</button>
           <%}%>
+          <%if(favorite && user_id) {%>
+            <button name="favMap" value="False" class="btn btn-light">Unfavorite Map ♡</button>
+            <%}%>
         </div>
       </form>
         <p><%= category %></p>
@@ -82,8 +88,10 @@
             <% } %>
             <div class="flag-buttons mt-5">
               <% if(user_id && owner) { %>
-              <button class="btn btn-warning">Edit</button>
-              <button class="btn btn-danger">Delete</button>
+              <form action="" method="POST">
+              <button name="editFlag" value="<%= i %>" class="btn btn-warning">Edit</button>
+              <button name="deleteFlag" value="<%= i %>" class="btn btn-danger">Delete</button>
+              </form>
               <% } %>
             </div>
           </div>
@@ -138,7 +146,7 @@
               <label for="imageURL">Image URL</label>
               <input type="text" name="imageURL" class="form-control" id="imageURL" placeholder="Select image URL" />
             </div>
-            <button type="submit" class="btn btn-primary flagSubmit">Submit</button>
+            <button name="sendFlag" value="True" type="submit" class="btn btn-primary flagSubmit">Submit</button>
           </form>
           <!-- [FORM END] -->
       </div>
@@ -215,7 +223,7 @@
     };
 
 
-    
+
     $('.flagSubmit').on("click", function(){
       $("input[name=coordinates]").val(coords);
       $("input[name=address]").val(address);
