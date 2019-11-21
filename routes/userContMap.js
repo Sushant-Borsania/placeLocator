@@ -6,7 +6,7 @@ module.exports = db => {
     if (req.session.user_id2 !== undefined) {
       let query = `SELECT * FROM maps`;
       let query2 = `SELECT maps.id, maps.name, maps.category, maps.map_latlong, flags.latlong FROM maps JOIN flags ON maps.id = flags.map_id;`;
-      let query5 = `SELECT maps.id FROM maps JOIN contributors ON contributors.map_id = maps.id JOIN users on contributors.user_id = users.id WHERE contributors.user_id = (SELECT users.id FROM users WHERE users.username = '${req.session.user_id2}');`;
+      let query5 = `SELECT distinct(maps.id) FROM maps JOIN contributors ON contributors.map_id = maps.id JOIN users on contributors.user_id = users.id WHERE contributors.user_id = (SELECT users.id FROM users WHERE users.username = '${req.session.user_id2}');`;
       db.query(query5).then(d5 => {
         let contId = [];
         d5.rows.forEach(el => {
