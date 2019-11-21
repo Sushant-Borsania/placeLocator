@@ -124,13 +124,36 @@ module.exports = db => {
       let qFlagDelete = `DELETE FROM flags where id = (SELECT flags.id
         FROM flags
         WHERE flags.map_id = '${mapID}'
-        ORDER BY flags.id
         OFFSET '${flagDelete}' FETCH FIRST
+        1 ROWS ONLY
+        );`;
+      let qFlagEdit = `SELECT * from flags where flags.id = (SELECT flags.id
+        FROM flags
+        WHERE flags.map_id = '${mapID}'
+        ORDER BY flags.id
+        OFFSET '${flagEdit}' FETCH FIRST
         1 ROWS ONLY
         );`;
 
       if (flagEdit !== undefined) {
         //Discuss what this means, flagEdit returns INDEX of flag in order of creation date
+        // console.log("EDIT", flagEdit);
+        db.query(qFlagEdit).then(data => {
+          const title = data.rows[0].title;
+          const description = data.rows[0].description;
+          const image = data.rows[0].image;
+          const flagId = data.rows[0].id;
+          const mapId = mapID;
+          // console.log(title, description, image);
+          res.render("flagEdit", {
+            title,
+            description,
+            image,
+            flagId,
+            mapId,
+            user_id: req.session["user_id2"]
+          });
+        });
       }
 
       if (flagDelete !== undefined) {

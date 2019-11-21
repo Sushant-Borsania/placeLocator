@@ -52,7 +52,6 @@
         <div class="map_placeholder">
           <div class="custom_grid_2" id="singleMap" style="height: 300px"></div>
         </div>
-
           <h4 class="mt-4">Category</h4>
           <form action="" method="POST">
           <div style="float: right;">
@@ -139,8 +138,7 @@
                 id="flagDescription"
                 aria-describedby="description"
                 placeholder="Add description"
-              >
-              </textarea>
+              ></textarea>
             </div>
             <div class="form-group">
               <label for="imageURL">Image URL</label>
@@ -188,6 +186,7 @@
   const onPopupOpen = () => {
     $(".marker-delete-button:visible").click(function() {
       results.clearLayers();
+      $(".flag-content").addClass("hidden");
     });
   };
   let searchControl = new L.esri.Controls.Geosearch().addTo(map);
@@ -199,6 +198,7 @@
       //Init marker
       let markerOne = L.marker(data.results[i].latlng);
       //Add marker layer
+
       results.addLayer(markerOne);
       //Add popup with X
       markerOne.bindPopup(
@@ -214,23 +214,44 @@
        setTimeout(function() {
          $(".pointer").fadeOut("slow");
        }, 3400);
-
+       //From database
        data.flagCords.forEach(flag => {
-    L.marker(flag).addTo(map);
-       });
+        L.marker(flag).addTo(map);
+
+    });
        map.fitBounds(data.flagCords);
        return address, coords;
     };
-
-
-
     $('.flagSubmit').on("click", function(){
       $("input[name=coordinates]").val(coords);
       $("input[name=address]").val(address);
     });
-
     createSingleMap(data);
     </script>
   </body>
 </html>
 
+<!-- //  function markerOnClick(e){
+  //    console.log("%%%");
+  //     // console.log(this.getLatLng());
+  //    let latLRaw = this.getLatLng()
+  //   //  let latL = latLRaw.substring(6);
+  //   let lattitude = latLRaw.lat;
+  //   let longitude = latLRaw.lng;
+  //   console.log("hi. you clicked the marker at " + latLRaw.lat + ' ' + latLRaw.lng);
+  //   const latlng = [lattitude, longitude];
+  //   console.log(latlng)
+      //     L.marker(flag).bindPopup(
+//     "<input type='button' value='Explore this marker' class='marker-explore-button'/>"
+//       ).addTo(map);
+//   L.marker(flag).on("popupopen", onPopupOpenA)
+
+  // } -->
+<!-- 
+  //   function markerOnClick()
+  //     { console.log("hiii") }
+
+  //   const onPopupOpenA = (e) => {
+  //     console.log('OPEN')
+  //   $(".marker-explore-button").on('click', markerOnClick);
+  // }; -->

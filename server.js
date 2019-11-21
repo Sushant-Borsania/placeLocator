@@ -56,6 +56,7 @@ const userMapRoutes = require("./routes/userMap");
 const userFavMapRoutes = require("./routes/userFavMap");
 const userContMapRoutes = require("./routes/userContMap");
 const logoutRoutes = require("./routes/logout");
+const flagEditRoutes = require("./routes/flagEdit");
 
 //Importing helper file
 const mapCreator = require("./helpers");
@@ -75,6 +76,8 @@ app.use(
   },
   mapIdRoutes(db)
 );
+app.use("/flagEdit", flagEditRoutes(db));
+
 app.use("/login", loginRoutes(db));
 app.use("/logout", logoutRoutes(db));
 app.use("/register", registerRoutes(db));
