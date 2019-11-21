@@ -18,61 +18,49 @@
     />
     <link rel="stylesheet" href="/styles/style.css" type="text/css" />
     <title>PlaceLocator</title>
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+    <!-- Leaflet JS -->
+    <script
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+    ></script>
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
   <% include ../views/partials/navbar.ejs %>
   <body>
     <div class="container-fluid">
       <div class="header_front">
         <h2 class="">My Contributions</h2>
-        <button type="button" class="btn btn-primary">Create New Map</button>
+        <% if(user_id) { %>
+        <div class="col my-auto text-right">
+          <a href="/create" class="btn btn-primary">Create New Map</a>
+        </div>
+        <% } %>
       </div>
     </div>
-    <div class="custom_grid">
-      <div class="card" style="width: 22rem;">
-        <div class="mapPlaceholder" id="mapid-${i}"></div>
-        <div class="card-body">
-          <div class="left-content">
-            <h5 class="card-title">Map Name</h5>
-            <p class="card-text">
-              Category: Gym
-            </p>
-          </div>
-          <div class="right-content">
-            <i class="fas fa-plus"></i>
-          </div>
-        </div>
-        <a href="#" class="btn btn-primary">Explore</a>
-      </div>
-      <div class="card" style="width: 22rem;">
-        <img class="card-img-top" src="https://picsum.photos/300/200" alt="Card image cap" />
-        <div class="card-body">
-          <div class="left-content">
-            <h5 class="card-title">Map Name</h5>
-            <p class="card-text">
-              Category: Gym
-            </p>
-          </div>
-          <div class="right-content">
-            <i class="fas fa-plus"></i>
-          </div>
-        </div>
-        <a href="#" class="btn btn-primary">Explore</a>
-      </div>
-      <div class="card" style="width: 22rem;">
-        <img class="card-img-top" src="https://picsum.photos/300/200" alt="Card image cap" />
-        <div class="card-body">
-          <div class="left-content">
-            <h5 class="card-title">Map Name</h5>
-            <p class="card-text">
-              Category: Gym
-            </p>
-          </div>
-          <div class="right-content">
-            <i class="fas fa-plus"></i>
-          </div>
-        </div>
-        <a href="#" class="btn btn-primary">Explore</a>
-      </div>
-    </div>
+    <div class="custom_grid"></div>
   </body>
+  <script>
+    let latlangRaw = "<%= latlngData %>";
+    let nameRaw = "<%= name %>";
+    let categoryRaw = "<%= category %>";
+    let flagRaw = "<%= flags %>";
+    let idRaw = "<%= id %>";
+
+    let latlang = JSON.parse(latlangRaw);
+    let name = nameRaw.split(",");
+    let category = categoryRaw.split(",");
+    let flags = JSON.parse(flagRaw);
+    let id = idRaw.split(",");
+    let y = [latlang, name, category, flags, id];
+    mapCreator(y);
+  </script>
 </html>

@@ -5,6 +5,7 @@ const mapCreator = data => {
   const category = data[2];
   const flags = data[3];
   const id = data[4];
+
   latLang.forEach((data, i) => {
     $(".custom_grid").append(`
     <div class="card" style="width: 22rem;">
@@ -15,10 +16,6 @@ const mapCreator = data => {
           <p class="card-text">
             Category: ${category[i]}
           </p>
-        </div>
-        <div class="right-content">
-          <i class="fas fa-heart"></i>
-          <i class="fas fa-plus"></i>
         </div>
       </div>
       <a href="/maps/${id[i]}" class="btn btn-primary">Explore</a>

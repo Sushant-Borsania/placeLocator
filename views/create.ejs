@@ -10,6 +10,19 @@
       integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+    <!-- Leaflet JS -->
+    <script
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+    ></script>
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <link rel="stylesheet" href="/styles/style.css" type="text/css" />
     <title>PlaceLocator</title>
   </head>
@@ -19,29 +32,61 @@
       <div>
         <h4>Create New Map</h4>
       </div>
-      <form>
+      <form method="POST" action="/create" class="addMap">
         <div class="form-group">
-          <label for="Name">Name</label>
+          <label for="name">Name</label>
           <input
             type="text"
             class="form-control"
-            id="name"
+            name="name"
             aria-describedby="nameOfMap"
             placeholder="Enter the name of map"
           />
         </div>
         <div class="form-group">
           <label for="category">Category</label>
-          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Category" />
+          <input
+            type="text"
+            class="form-control"
+            name="category"
+            placeholder="Category"
+          />
         </div>
-        <div class="map_placeholder">
-          <img src="https://picsum.photos/300/200" class="rounded" alt="MAP" />
+        <div class="form-group">
+          <input
+            type="hidden"
+            class="form-control"
+            name="coordinates"
+            value=""
+          />
         </div>
+        <div class="map_placeholder" id="blankMap" style="height: 300px"></div>
         <div class="sub block mt-3">
-          <button type="submit" class="btn btn-primary">Add</button>
-          <button type="button" class="btn btn-danger">Cancel</button>
+          <button type="submit" class="btn btn-primary addition">Add</button>
+          <button
+            onclick="location.href = '/';"
+            type="button"
+            class="btn btn-danger"
+          >
+            Cancel
+          </button>
         </div>
       </form>
     </div>
+    <script>
+      let mymap = L.map("blankMap").setView([51.051491, -114.061751], 14);
+      L.tileLayer(
+        "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw",
+        {
+          maxZoom: 18,
+          id: "mapbox.streets"
+        }
+      ).addTo(mymap);
+      // let centerCoord = L.map("blankMap").getCenter();
+
+      $(".addMap").on("click", function() {
+        $("input[name=coordinates]").val(mymap.getCenter());
+      });
+    </script>
   </body>
 </html>
