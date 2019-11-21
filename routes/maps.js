@@ -134,27 +134,27 @@ module.exports = db => {
       }
 
       if (flagDelete !== undefined) {
-        db.query(qFlagDelete);
+        db.query(qFlagDelete).then(res.redirect(`${mapID}`));
       }
 
       if (mapAdd === "True") {
-        db.query(qMapAdd).then(
-          res.redirect(`/user/${req.session["user_id2"]}`)
-        );
+        db.query(qMapAdd)
+          .then(res.redirect(`/user/${req.session["user_id2"]}`))
+          .then(res.redirect(`${mapID}`));
       }
 
       if (mapAdd === "False") {
-        db.query(qMapDelete).then(
-          res.redirect(`/user/${req.session["user_id2"]}`)
-        );
+        db.query(qMapDelete)
+          .then(res.redirect(`/user/${req.session["user_id2"]}`))
+          .then(res.redirect(`${mapID}`));
       }
 
       if (mapFav === "True") {
-        db.query(qMapFav);
+        db.query(qMapFav).then(res.redirect(`${mapID}`));
       }
 
       if (mapFav === "False") {
-        db.query(qMapUnfav);
+        db.query(qMapUnfav).then(res.redirect(`${mapID}`));
       }
       if (addFlag === "True") {
         const flagName = req.body.flagName;
@@ -181,25 +181,25 @@ module.exports = db => {
                 `
             SELECT users.id FROM users WHERE users.username = '${req.session.user_id2}'
             `
-              ).then(data => {
-                let user = data.rows[0].id;
-                if (owner !== user) {
-                  db.query(`
+              )
+                .then(data => {
+                  let user = data.rows[0].id;
+                  if (owner !== user) {
+                    db.query(`
                 INSERT INTO contributors
                 (map_id,user_id)
                   VALUES
                 ('${mapID}', '${user}');
                 `);
-                }
-              });
+                  }
+                })
+                .then(res.redirect(`${mapID}`));
             })
         );
       }
       //Get the Owner of map
 
       //if the owner of map and username does not match, then add to contribution
-
-      res.redirect(`${mapID}`);
     });
   return router;
 };
