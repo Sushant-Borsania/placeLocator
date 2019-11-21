@@ -1,5 +1,11 @@
 const express = require("express");
 const router = express.Router();
+// let LocalStorage = require("node-localstorage").LocalStorage;
+// // if (typeof localStorage === "undefined" || localStorage === null) {
+// // }
+// let localStorage = new LocalStorage("./scratch");
+// localStorage.setItem("myFirstKey", "myFirstValue");
+// console.log(localStorage.getItem("myFirstKey"));
 
 module.exports = db => {
   router
@@ -111,6 +117,7 @@ module.exports = db => {
       let addFlag = req.body.sendFlag;
       let flagEdit = req.body.editFlag;
       let flagDelete = req.body.deleteFlag;
+
       let qMapAdd = `INSERT INTO maps
       (user_id,name,category,owner_id,map_latlong)
     VALUES
@@ -134,10 +141,26 @@ module.exports = db => {
         OFFSET '${flagEdit}' FETCH FIRST
         1 ROWS ONLY
         );`;
+      let flagCoordsRaw = req.body.flagCoordinates;
+      if (flagCoordsRaw !== undefined) {
+        let flagCoords = flagCoordsRaw.substring(6);
+        let qFlagData = `SELECT * FROM flags where flags.latlong ~= '${flagCoords}' AND flags.map_id = '${mapID}';`;
+        db.query(qFlagData).then(data => {
+          const title = data.rows[0].title;
+          const description = data.rows[0].description;
+          const image = data.rows[0].image;
+          const address = data.rows[0].address;
+          res.render("flagCoords", {
+            title,
+            description,
+            image,
+            address,
+            user_id: req.session["user_id2"]
+          });
+        });
+      }
 
       if (flagEdit !== undefined) {
-        //Discuss what this means, flagEdit returns INDEX of flag in order of creation date
-        // console.log("EDIT", flagEdit);
         db.query(qFlagEdit).then(data => {
           const title = data.rows[0].title;
           const description = data.rows[0].description;
