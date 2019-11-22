@@ -177,9 +177,10 @@ module.exports = db => {
       }
 
       if (mapAdd === "True") {
-        db.query(qMapAdd)
-          .then(res.redirect(`/user/${req.session["user_id2"]}`))
-          .then(res.redirect(`${mapID}`));
+        db.query(qMapAdd).then(
+          res.redirect(`/user/${req.session["user_id2"]}`)
+        );
+        // .then(res.redirect(`${mapID}`));
       }
 
       if (mapAdd === "False") {
