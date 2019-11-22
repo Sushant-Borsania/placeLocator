@@ -24,7 +24,9 @@ module.exports = db => {
           const users = data.rows;
           users.forEach(user => {
             if (user.username === userName) {
-              res.send("username already taken!");
+              res.send(
+                `Username Already Taken! <a href=/register>Click here to try again</a>. `
+              );
             }
           });
           //insert into database;

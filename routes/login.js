@@ -25,12 +25,16 @@ module.exports = db => {
               req.session.user_id2 = user.username;
               res.redirect(`/`);
             } else {
-              res.send("Password is incorrect");
+              res.send(
+                `Password is incorrect. <a href=/login>Click here to try again</a>. `
+              );
             }
           }
         }
         if (userExists === false) {
-          res.send("Username does not exist!");
+          res.send(
+            `Username does not exist. <a href=/login>Click here to try again</a>. Or, <a href=/register>click here to register.</a> `
+          );
         }
       });
     });

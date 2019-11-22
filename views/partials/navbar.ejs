@@ -17,7 +17,6 @@
         <li class="nav-item active">
           <a class="nav-link" href="/">Home</a>
         </li>
-        <!-- NEED TO ADD USER-ID IN TEMPLATEVARS IN EVERY ROUTE JS -->
         <% if(user_id) { %>
         <li class="nav-item">
           <a class="nav-link" href="/user/<%=user_id %>">My maps</a>
@@ -39,7 +38,11 @@
             </button>
           </form>
         </li>
-        <label for="name"><b>Logged in as <%= user_id %></b></label>
+        <li class="nav-item">
+          <label class="nav-link" for="name"
+            ><b>Logged in as <%= user_id %></b></label
+          >
+        </li>
         <% } else { %>
         <li class="nav-item">
           <a class="nav-link" href="/login">Login</a>

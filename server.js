@@ -125,6 +125,10 @@ app.use(
 // Separate them into separate routes files (see above).
 app.use("/", indexRoutes(db));
 
+app.get("*", (req, res) => {
+  res.render("catchAll");
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });

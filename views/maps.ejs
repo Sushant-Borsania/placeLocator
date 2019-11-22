@@ -111,6 +111,7 @@
                 id="flagName"
                 aria-describedby="name of flag"
                 placeholder="Enter name please"
+                required
               />
             </div>
             <div class="form-group">
@@ -138,11 +139,14 @@
                 id="flagDescription"
                 aria-describedby="description"
                 placeholder="Add description"
+                required
               ></textarea>
             </div>
             <div class="form-group">
               <label for="imageURL">Image URL</label>
-              <input type="text" name="imageURL" class="form-control" id="imageURL" placeholder="Select image URL" />
+              <input type="text" name="imageURL" class="form-control" id="imageURL" placeholder="Select image URL"
+              required
+              />
             </div>
 
             <button name="sendFlag" value="True" type="submit" class="btn btn-primary flagSubmit">Submit</button>
@@ -224,7 +228,7 @@
        setTimeout(function() {
          $(".pointer").fadeOut("slow");
        }, 3400);
-      
+
        //Creating function to call flag click
        function flagClicker(e){
           let flagCoords = e.latlng;
@@ -232,17 +236,6 @@
          //assign values to inputs hidden
          $("input[name=flagCoordinates]").val(flagCoords);
          $('#flagForm').submit();
-        //  $.ajax({
-        //   type: "POST",
-        //   url: "/maps/2",
-        //   contentType: "application/json;charset=UTF-8",
-        //   data: JSON.stringify(e.latlng),
-        //   dataType: "json"
-        // }).done(function(response){
-        //   console.log(response);
-        // }).fail(function(err){
-        //   console.error(err);
-        // })
        }
        //From database
        data.flagCords.forEach(flag => {
@@ -261,28 +254,3 @@
     </script>
   </body>
 </html>
-
-<!-- //  function markerOnClick(e){
-  //    console.log("%%%");
-  //     // console.log(this.getLatLng());
-  //    let latLRaw = this.getLatLng()
-  //   //  let latL = latLRaw.substring(6);
-  //   let lattitude = latLRaw.lat;
-  //   let longitude = latLRaw.lng;
-  //   console.log("hi. you clicked the marker at " + latLRaw.lat + ' ' + latLRaw.lng);
-  //   const latlng = [lattitude, longitude];
-  //   console.log(latlng)
-      //     L.marker(flag).bindPopup(
-//     "<input type='button' value='Explore this marker' class='marker-explore-button'/>"
-//       ).addTo(map);
-//   L.marker(flag).on("popupopen", onPopupOpenA)
-
-  // } -->
-<!-- 
-  //   function markerOnClick()
-  //     { console.log("hiii") }
-
-  //   const onPopupOpenA = (e) => {
-  //     console.log('OPEN')
-  //   $(".marker-explore-button").on('click', markerOnClick);
-  // }; -->
