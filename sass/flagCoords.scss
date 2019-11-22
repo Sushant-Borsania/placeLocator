@@ -1,6 +1,9 @@
 .container_flag {
   display: flex;
   flex-direction: column;
-  width: 450px;
-  justify-content: center;
+  align-items: center;
+}
+
+.flag_edit{
+  max-width: 65vw;
 }

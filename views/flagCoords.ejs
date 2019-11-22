@@ -56,16 +56,13 @@
     <% include ../views/partials/navbar.ejs %>
 
     <div class="container_flag">
-        <h3><%= title %></h3>
-        <br />
-        <h6>Get to know more about the place:</h6>
-        <p><%= description %></p>
-        <br />
-        <p>This is what it looks like</p>
-        <img src="<%= image %>" alt="This is how it looks" />
-        <p>Address:<%= address %></p>
-
-        <button class="btn btn-primary" onClick="history.back()">Go Back</button>
-      </div>
+      <h3><%= title %></h3>
+      <!-- <br /> -->
+      <em><%= description %></em>
+      <!-- <br /> -->
+      <p><b>Address:</b><%= address %></p>
+      <img class="img-thumbnail" src="<%= image %>" alt="This is how it looks" />
+      <button class="btn btn-primary mt-2" onClick="history.back()">Go Back</button>
+    </div>
   </body>
 </html>

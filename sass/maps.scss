@@ -9,9 +9,15 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 100%;
   button {
     margin-left: auto;
   }
+}
+
+.flag-image {
+  height: 200px;
+  width: 350px;
 }
 
 .mapPlaceholder {
@@ -20,4 +26,8 @@
 
 .hidden {
   display: none;
+}
+
+.map-content {
+  // background-color: blueviolet;
 }

@@ -48,13 +48,14 @@
   <body>
     <div class="container-maps">
       <div class="map-content">
-        <h4><%= name %></h4>
+        <h4 class="text-center"><%= name %></h4>
         <div class="map_placeholder">
           <div class="custom_grid_2" id="singleMap" style="height: 300px"></div>
         </div>
-          <h4 class="mt-4">Category</h4>
+          <!-- <h4 class="mt-4">Category</h4> -->
+          <p class="mt-3"><b>Category</b> - <%= category %></p>
           <form action="" method="POST">
-          <div style="float: right;">
+          <div>
             <%if(!owned && user_id) {%>
           <button name="addMap" value="True" class="btn btn-light">Add Map <b>+</b></button>
           <%}%>
@@ -69,21 +70,36 @@
             <%}%>
         </div>
       </form>
-        <p><%= category %></p>
+        
         <!-- defining the variables -->
         <% let flagDesc = JSON.parse(flagDescription) %> <% let flagN =
         JSON.parse(flagName) %> <% let flagURL = JSON.parse(flagImageUrl) %>
-
-        <div class="current-flags">
+        <hr>
+        <div class="current-flags mt-5">
           <% flagDesc.forEach((el, i) => {%>
-          <div class="alert alert-primary flag-brief" role="alert">
+            <div class="card mt-3" style="width: 20rem;">
+              <%if(flagURL.length) {%>
+              <img src="<%= flagURL[i]%>" class="card-img-top" alt="Flag details">
+              <% } %>
+              <div class="card-body">
+                <h5 class="card-title"><%= flagN[i] %></h5>
+                <p class="card-text"><%= el%></p>
+                <% if(user_id && owner) { %>
+                  <form action="" method="POST">
+                  <button name="editFlag" value="<%= i %>" class="btn btn-warning">Edit</button>
+                  <button name="deleteFlag" value="<%= i %>" class="btn btn-danger">Delete</button>
+                  </form>
+                  <% } %>
+              </div>
+            </div>
+
+          <!-- <div class="alert alert-primary flag-brief" role="alert">
             <div class="flag-details">
-              <h6>
-                <%= flagN[i] %> - <%= el%>
-              </h6>
+              <h3><%= flagN[i] %></h3>
+              <p><%= el%></p>
             </div>
             <%if(flagURL.length) {%>
-            <img src="<%= flagURL[i]%> %>" style="width: 100%" />
+            <img src="<%= flagURL[i]%> " class="flag-image img-thumbnail"/>
             <% } %>
             <div class="flag-buttons mt-5">
               <% if(user_id && owner) { %>
@@ -93,7 +109,7 @@
               </form>
               <% } %>
             </div>
-          </div>
+          </div> -->
           <% })%>
         </div>
       </div>
@@ -189,7 +205,7 @@
       const createSingleMap = data => {
       let map = L.map("singleMap", {
       center: data.latLang,
-       zoom: 12
+       zoom: 10
       });
       L.control.scale().addTo(map);
       L.tileLayer(
