@@ -8,6 +8,11 @@
 
 ## Photos
 
+!["Index Page"](/docs/IndexPage.png)
+!["Create New Map Page"](/docs/CreateNewMap.png)
+!["Map Summary"](/docs/EditMap.png)
+!["Flag on a map summary"](/docs/FlagSummary.png)
+
 ## How it works
 
 - A user must either log in or authenticate to create maps
