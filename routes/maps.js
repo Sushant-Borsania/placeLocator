@@ -110,7 +110,6 @@ module.exports = db => {
       let addFlag = req.body.sendFlag;
       let flagEdit = req.body.editFlag;
       let flagDelete = req.body.deleteFlag;
-
       let qMapAdd = `INSERT INTO maps
       (user_id,name,category,owner_id,map_latlong)
     VALUES
