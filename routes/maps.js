@@ -1,11 +1,5 @@
 const express = require("express");
 const router = express.Router();
-// let LocalStorage = require("node-localstorage").LocalStorage;
-// // if (typeof localStorage === "undefined" || localStorage === null) {
-// // }
-// let localStorage = new LocalStorage("./scratch");
-// localStorage.setItem("myFirstKey", "myFirstValue");
-// console.log(localStorage.getItem("myFirstKey"));
 
 module.exports = db => {
   router
@@ -34,7 +28,6 @@ module.exports = db => {
             }
           });
           db.query(query2).then(data => {
-            // console.log("IDD",data.rows[0]);
             if (data.rows[0] === undefined) {
               res.redirect(`/`);
             }
@@ -168,7 +161,6 @@ module.exports = db => {
           const image = data.rows[0].image;
           const flagId = data.rows[0].id;
           const mapId = mapID;
-          // console.log(title, description, image);
           res.render("flagEdit", {
             title,
             description,

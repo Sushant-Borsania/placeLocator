@@ -232,7 +232,6 @@
        //Creating function to call flag click
        function flagClicker(e){
           let flagCoords = e.latlng;
-         console.log("Coords are", e.latlng);
          //assign values to inputs hidden
          $("input[name=flagCoordinates]").val(flagCoords);
          $('#flagForm').submit();

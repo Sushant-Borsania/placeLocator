@@ -44,7 +44,6 @@ module.exports = db => {
       let searchParam = req.body.search;
       let queryParams = [];
       let queryParams2 = [];
-      // console.log(searchParam); //returns search result
 
       let queryString = "SELECT * FROM maps";
       let queryString2 = `SELECT maps.id, maps.name, maps.category, maps.map_latlong, flags.latlong FROM maps JOIN flags ON maps.id = flags.map_id`;

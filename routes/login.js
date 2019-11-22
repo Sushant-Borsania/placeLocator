@@ -21,7 +21,6 @@ module.exports = db => {
           if (user.username === req.body.usernameID) {
             userExists = true;
             if (bcrypt.compareSync(req.body.passwordID, user.password)) {
-              // if (user.password === req.body.passwordID) {
               req.session.user_id2 = user.username;
               res.redirect(`/`);
             } else {
