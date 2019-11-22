@@ -1,5 +1,7 @@
 # placeLocator
 
+### This project was created by Sushant (github: [Sushant-ABdigital](https://github.com/Sushant-ABdigital/))) and Sam (github: [SamuelRush](https://github.com/SamuelRush/))
+
 ## What it does
 
 - An application where collaboration between maps is encouraged! An authenticated user can create maps and share with others, whether they are logged in or not.
