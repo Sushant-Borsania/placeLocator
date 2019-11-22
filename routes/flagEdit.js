@@ -6,16 +6,19 @@ module.exports = db => {
     .route("/")
     .get((req, res) => {})
     .post((req, res) => {
-      console.log(req.body.flagName);
-      console.log(req.body.flagDescription);
-      console.log(req.body.imageURL);
-      const query = `UPDATE flags 
-      SET title = '${req.body.flagName}',
-          description = '${req.body.flagDescription}',
-          image = '${req.body.imageURL}'
+      const flagName = req.body.flagName;
+      const flagDesc = req.body.flagDescription;
+      const imageURL = req.body.imageURL;
+
+      const query = `UPDATE flags
+      SET title = $1,
+          description = $2,
+          image = $3
       WHERE flags.id = '${req.body.flagId}';
       `;
-      db.query(query).then(res.redirect(`/maps/${req.body.mapId}`));
+      db.query(query, [flagName, flagDesc, imageURL]).then(
+        res.redirect(`/maps/${req.body.mapId}`)
+      );
     });
   return router;
 };

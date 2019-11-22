@@ -142,6 +142,7 @@ module.exports = db => {
         1 ROWS ONLY
         );`;
       let flagCoordsRaw = req.body.flagCoordinates;
+
       if (flagCoordsRaw !== undefined) {
         let flagCoords = flagCoordsRaw.substring(6);
         let qFlagData = `SELECT * FROM flags where flags.latlong ~= '${flagCoords}' AND flags.map_id = '${mapID}';`;
@@ -212,8 +213,9 @@ module.exports = db => {
         db.query(
           `
         INSERT INTO flags (latlong,address,map_id,title,description,image,user_id)
-        VALUES ('${flagCoords}', '${flagAddress}', '${mapID}', '${flagName}', '${flagDescription}', '${imageURL}', (SELECT users.id FROM users WHERE users.username = '${req.session.user_id2}') )
-      `
+        VALUES ('${flagCoords}', '${flagAddress}', '${mapID}', $1, $2, $3, (SELECT users.id FROM users WHERE users.username = '${req.session.user_id2}') )
+      `,
+          [flagName, flagDescription, imageURL]
         ).then(
           db
             .query(

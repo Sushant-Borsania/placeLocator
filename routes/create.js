@@ -21,7 +21,8 @@ module.exports = db => {
         `      INSERT INTO maps
         (user_id,name,category,owner_id,map_latlong)
       VALUES
-        ((SELECT users.id FROM users WHERE users.username = '${req.session.user_id2}'), '${mapName}', '${mapCat}', (SELECT users.id FROM users WHERE users.username = '${req.session.user_id2}'), '${mapCoords}') RETURNING id;`
+        ((SELECT users.id FROM users WHERE users.username = '${req.session.user_id2}'), $1, $2, (SELECT users.id FROM users WHERE users.username = '${req.session.user_id2}'), '${mapCoords}') RETURNING id;`,
+        [mapName, mapCat]
       ).then(data => {
         res.redirect(`/maps/${data.rows[0].id}`);
       });

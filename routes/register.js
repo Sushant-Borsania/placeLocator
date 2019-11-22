@@ -17,8 +17,12 @@ module.exports = db => {
       const name = req.body.name;
       const userName = req.body.username;
       const password = bcrypt.hashSync(req.body.password, 10);
+      let queryParams = [];
+
       if (!name || !userName || !password) {
-        res.send("username and password and name can not be empty");
+        res.send(
+          `Username and password cannot be empty! <a href=/register>Click here to try again</a>. `
+        );
       } else {
         db.query(`SELECT * FROM users;`).then(data => {
           const users = data.rows;
@@ -34,7 +38,8 @@ module.exports = db => {
             `INSERT INTO users
                           (name,username,password)
                           VALUES
-                          ('${name}', '${userName}', '${password}');`
+                          ($1, $2, $3);`,
+            [name, userName, password]
           ).then(data => {
             req.session.user_id2 = userName;
             res.redirect("/");
